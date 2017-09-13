@@ -1,0 +1,31 @@
+{
+  "name": "unifi-nexudus-hotspot",
+  "description": "Custom UniFi hotspot portal that integrates with Nexudus Spaces and membership status aware",
+  "version": "0.0.0",
+  "license": "GPL-3.0",
+  "author": "Dennis Alund",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DennisAlund/unifi-nexudus-hotspot.git"
+  },
+  "scripts": {
+    "start": "tsc -p . && node ./server.js",
+    "watch": "tsc -w -p .",
+    "debug": "tsc -p . && DEBUG=unifi-nexudus-hotspot:* node ./server.js",
+    "docker-debug": "docker-compose up"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "morgan": "~1.8.1",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "serve-favicon": "~2.4.2"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.28",
+    "pug": "^2.0.0-rc.4"
+  }
+}

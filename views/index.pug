@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1= title
+  form(method='post', action='/authenticate/')
+    .form-group
+      input#email.form-control(type='text', name="email", placeholder='Email')
+      small.form-text.text-muted The email address that you registered your membership with
+    .form-group
+      input#password.form-control(type='password', name="password", placeholder='Password')
+      small.form-text.text-muted
+        | Your password at Nexudus Spaces (reset or contact front desk if you have forgotten)
+
+    input#mac(type='hidden', name="mac", value=mac)
+    input#ap(type='hidden', name="ap", value=ap)
+    input#url(type='hidden', name="url", value=url)
+    button.btn.btn-primary(type='submit') Submit

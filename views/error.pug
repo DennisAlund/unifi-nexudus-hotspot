@@ -1,0 +1,6 @@
+extends layout
+
+block content
+  h1 HTTP #{error.status}
+  h2 #{error.message}
+  pre #{error.stack}
