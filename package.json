@@ -9,10 +9,9 @@
     "url": "https://github.com/DennisAlund/unifi-nexudus-hotspot.git"
   },
   "scripts": {
-    "start": "tsc -p . && node ./server.js",
+    "start": "tsc -p . && NODE_ENV=production node ./server.js",
     "watch": "tsc -w -p .",
-    "debug": "tsc -p . && DEBUG=unifi-nexudus-hotspot:* node ./server.js",
-    "docker-debug": "docker-compose up"
+    "debug": "tsc -p . && DEBUG=request,unifi-nexudus-hotspot:* node ./server.js"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -22,10 +21,13 @@
     "morgan": "~1.8.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
-    "serve-favicon": "~2.4.2"
+    "serve-favicon": "~2.4.2",
+    "set-cookie-parser": "^2.0.0",
+    "tough-cookie": "^2.3.2"
   },
   "devDependencies": {
     "@types/node": "^8.0.28",
+    "@types/request-promise": "^4.1.37",
     "pug": "^2.0.0-rc.4"
   }
 }

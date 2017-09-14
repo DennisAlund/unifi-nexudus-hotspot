@@ -1,5 +1,6 @@
 import * as express from "express";
 import * as debug from "debug"
+import * as app from "../app";
 
 const debugLog = debug("unifi-nexudus-hotspot:router:index");
 
@@ -8,11 +9,12 @@ declare var process: any;
 export const router = express.Router();
 
 router.get("/", (req, res, next) => {
-    debugLog("Request params: " + JSON.stringify(req.params, null, " "));
+
+    debugLog("Request params: " + JSON.stringify(req.query));
  
     const mac = req.query.mac; // The connecting device's MAC address
     const ap = req.query.ap; // MAC address of the AP that device is connecting to 
-    const url = req.query.url || process.env.DEFAULT_REDIRECT_URL || "https://www.kumpul.co";
+    const url = req.query.url || app.hotspot.get("redirect_url");
 
     if (!mac || !ap) {
         return next({
