@@ -58,9 +58,9 @@ debugLog(`unifiUsername: ${unifiUsername}`);
 
 // UniFi controller admin password. This is needed to login authorize calls to the API.
 // This value *must* be overridden
-const unifiPassword = process.env.UNIFI_ADMIN_PASSWORD;
+const unifiPassword = process.env.UNIFI_ADMIN_PASSWORD || "";
 app.hotspot.set('unifi_password', unifiPassword);
-debugLog("unifiPassword: " + (unifiPassword ? "*****" : typeof unifiPassword));
+debugLog("unifiPassword: " + (unifiPassword.length > 0 ? "*****" : "<unset>"));
 
 // The port on which to serve this application on
 const port = process.env.PORT || '8080';
