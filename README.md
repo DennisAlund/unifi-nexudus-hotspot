@@ -14,6 +14,21 @@ docker build --rm -t kumpul/unifi-nexudus-hotspot .
 # Running a container
 All examples for local execution are using Linux as reference. Should be the same for OSX users, but Windows users might want to double check the syntax.
 
+```bash
+ docker run --rm -p 8080:80\
+    -e NEXUDUS_SPACE_NAME=kumpul\
+    -e UNIFI_ADMIN_USER=myAdminUser\
+    -e UNIFI_ADMIN_PASSWORD=secretPasssword\
+    -e UNIFI_HOST=10.11.12.13\
+    kumpul/unifi-nexudus-hotspot
+```
+
+To run the image in debug mode, just add `debug` after the name of the image.
+
+```bash
+ docker run kumpul/unifi-nexudus-hotspot debug
+ ```
+
 ## Environment variables
 These are the environment variables that are avaialable to be set in the application. Some of the variables has a reasonable default value if omitted when running the image. The others, which are recommended or required are described below.
 
@@ -22,7 +37,7 @@ These are the environment variables that are avaialable to be set in the applica
 * `UNIFI_SITE_NAME` - The short name of your UniFi site, as referred to by the controller. If you don't know what it is, and expecially if you only have one site configured, then it's most likely `default` and you don't need to worry about it *(default: `default`)*
 * `UNIFI_USE_SSL` - Whether your UniFi controller portal is setup to use SSL *(default: `true`)*
 * `UNIFI_SSL_SELF_SIGNED` - Whether your SSL certificate for the UniFi portal is self signed *(default: `false`)*
-* `UNIFI_DOMAIN` - IP or hostname of the UniFi controller portal, e.g. `unifi.example.com` *(default: `127.0.0.1`)*
+* `UNIFI_HOST` - IP or hostname of the UniFi controller portal, e.g. `unifi.example.com` *(default: `127.0.0.1`)*
 * `UNIFI_PORT` - The port on which the UniFi controller is responding to REST/HTTP requests. If you don't know which one it is, you can most likely just omit it and use default *(default: `8443`)*
 * `UNIFI_ADMIN_USER` - Username for the API calls to be authorized with the UniFi controller. It's recommended that you create a dedicated admin user for API calls like this one *(default: `admin`)*
 * `UNIFI_ADMIN_PASSWORD` (**required**) - Password for the API calls to be authorized with the UniFi controller.
@@ -32,22 +47,3 @@ The following environment variables are **absolutely required to be set**, they 
 
  * `NEXUDUS_SPACE_NAME`
  * `UNIFI_ADMIN_PASSWORD`
-
-
-### Run locally
-
-```bash
- docker run --rm -p 8080:80\
-    -e NEXUDUS_SPACE_NAME=kumpul\
-    -e UNIFI_ADMIN_USER=myAdminUser\
-    -e UNIFI_ADMIN_PASSWORD=secretPasssword\
-    -e UNIFI_DOMAIN=10.11.12.13\
-    kumpul/unifi-nexudus-hotspot
-```
-
-### Debug locally
-To run the image in debug mode, just add `debug` after the name of the image.
-
-```bash
- docker run kumpul/unifi-nexudus-hotspot debug
- ```

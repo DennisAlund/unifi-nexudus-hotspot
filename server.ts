@@ -37,9 +37,9 @@ app.hotspot.set('unifi_ssl_is_self_signed', unifiSslIsSelfSigned);
 debugLog(`unifiSslSelfSigned: ${unifiSslIsSelfSigned}`);
 
 // The domain name or IP of the controller.
-const unifiDomain = process.env.UNIFI_DOMAIN || "127.0.0.1";
-app.hotspot.set('unifi_domain', unifiDomain);
-debugLog(`unifiDomain: ${unifiDomain}`);
+const unifiHost = process.env.UNIFI_HOST || "127.0.0.1";
+app.hotspot.set('unifi_host', unifiHost);
+debugLog(`unifiHost: ${unifiHost}`);
 
 // The port on which the controller responds to REST/HTTP calls
 const unifiPort = process.env.UNIFI_PORT || "8443";
@@ -47,7 +47,7 @@ app.hotspot.set('unifi_port', unifiPort);
 debugLog(`unifiPort: ${unifiPort}`);
 
 // The full controller URL is composed of configuration values above
-const unifiUrl = `http${(unifiUseSsl ? "s" : "")}://${unifiDomain}:${unifiPort}`
+const unifiUrl = `http${(unifiUseSsl ? "s" : "")}://${unifiHost}:${unifiPort}`
 app.hotspot.set('unifi_url', unifiUrl);
 debugLog(`unifiUrl: ${unifiUrl}`);
 
