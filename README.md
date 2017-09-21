@@ -26,7 +26,7 @@ These are the environment variables that are avaialable to be set in the applica
 * `UNIFI_PORT` - The port on which the UniFi controller is responding to REST/HTTP requests. If you don't know which one it is, you can most likely just omit it and use default *(default: `8443`)*
 * `UNIFI_ADMIN_USER` - Username for the API calls to be authorized with the UniFi controller. It's recommended that you create a dedicated admin user for API calls like this one *(default: `admin`)*
 * `UNIFI_ADMIN_PASSWORD` (**required**) - Password for the API calls to be authorized with the UniFi controller.
-* `PORT` - The port on which to serve the application on *(default: `8080`)*
+* `PORT` - The port on which to serve the application on *(default: `80`)*
 
 The following environment variables are **absolutely required to be set**, they don't have any default values that makes any sense:
 
@@ -37,7 +37,7 @@ The following environment variables are **absolutely required to be set**, they 
 ### Run locally
 
 ```bash
- docker run --rm -p 8080:8080\
+ docker run --rm -p 8080:80\
     -e NEXUDUS_SPACE_NAME=kumpul\
     -e UNIFI_ADMIN_USER=myAdminUser\
     -e UNIFI_ADMIN_PASSWORD=secretPasssword\

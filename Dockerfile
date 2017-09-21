@@ -1,6 +1,6 @@
 FROM node:6.11-alpine
 
-ENV PORT=8080
+ENV PORT=80
 
 # Install tools
 RUN npm install -g typescript
