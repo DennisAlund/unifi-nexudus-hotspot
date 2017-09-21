@@ -1,3 +1,8 @@
+
+language: node_js
+node_js:
+  - "7"
+  
 sudo: required
 services:
   - docker
@@ -7,8 +12,9 @@ branches:
   - master
 
 before_script:
-- docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-- docker build --rm -t kumpul/unifi-nexudus-hotspot .
-- 
+  - export PACKAGE_VERSION=$(node -p -e "require('./package.json').version")
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+  - docker build --rm -t kumpul/unifi-nexudus-hotspot:${PACKAGE_VERSION} .
+  
 script:
-- docker push kumpul/unifi-nexudus-hotspot
+  - docker push kumpul/unifi-nexudus-hotspot
