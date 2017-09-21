@@ -4,7 +4,7 @@ import * as favicon from "serve-favicon";
 import * as logger from "morgan";
 import * as cookieParser from "cookie-parser";
 import * as bodyParser from "body-parser";
-import * as eh from "./request-handlers/errors";
+import * as errors from "./request-handlers/errors";
 import * as index from "./request-handlers/index";
 import * as authenticate from "./request-handlers/authenticate";
 
@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use("/", index.router);
 app.use("/authenticate", authenticate.router);
 
-app.use(eh.notFound);
-app.use(eh.error);
+app.use(errors.notFound);
+app.use(errors.error);
 
 export const hotspot = app;

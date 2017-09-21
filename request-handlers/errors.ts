@@ -1,9 +1,25 @@
-export const error = (err, req, res, next) => {    
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+import * as debug from "debug"
+const debugLog = debug("unifi-nexudus-hotspot:router:errors");
 
-  res.status(err.status || 500);
-  res.render('error');
+export const error = (err, req, res, next) => {
+  debugLog("Error object: " + JSON.stringify(err, null, 2));
+  if (res.headersSent) {
+    debugLog("Headers already sent. Continue request ...")
+    return next(err)
+  }
+
+  const statusCode = err.status || 500;
+  const locals:any = {
+    title: `HTTP ${statusCode}`,
+    message: err.message || "Something went wrong..."
+  };
+
+  if (req.app.get('env') === 'development') {
+    locals.stackTrace = err.stack;
+  }
+
+  res.status(statusCode);
+  res.render('error', locals);
 };
 
 export const notFound = (req, res, next) => {
