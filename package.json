@@ -11,7 +11,7 @@
   "scripts": {
     "start": "tsc -p . && NODE_ENV=production node ./server.js",
     "watch": "tsc -w -p .",
-    "debug": "tsc -p . && DEBUG=request,unifi-nexudus-hotspot:* node ./server.js"
+    "debug": "tsc -p . && NODE_ENV=development DEBUG=unifi-nexudus-hotspot:* node ./server.js"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
