@@ -1,4 +1,8 @@
 # unifi-nexudus-hotspot
+[![Dockherhub Build Status](https://img.shields.io/docker/build/kumpul/unifi-nexudus-hotspot.svg)](https://hub.docker.com/r/kumpul/unifi-nexudus-hotspot/builds/)
+[![Dockherhub Build Type](https://img.shields.io/docker/automated/kumpul/unifi-nexudus-hotspot.svg)](https://hub.docker.com/r/kumpul/unifi-nexudus-hotspot/builds/)
+
+
 UniFi - Custom portal that integrates with Nexudus Spaces and membership status aware
 
 # Build the image
