@@ -72,7 +72,7 @@ export const bootstrap = () => {
 
     function setEnvironmentVariableOrDefault(name:string, defaultValue:any) {
         const configuredValue = app.get(name);
-        if (typeof configuredValue === "undefined") {
+        if (typeof configuredValue === "undefined" || configuredValue === "") {
             app.set(name, defaultValue);            
             debugLog(`${name} [default]: ${defaultValue}`);
         } else {
