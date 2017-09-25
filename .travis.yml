@@ -1,0 +1,21 @@
+
+language: node_js
+
+node_js:
+  - "6.11"
+
+cache:
+  - src/node_modules
+
+branches:
+  only:
+  - master
+
+install:
+  - cd src
+  - npm install
+
+deploy:
+  provider: firebase
+  token: $FIREBASE_DEPLOY_KEY
+  project: default
