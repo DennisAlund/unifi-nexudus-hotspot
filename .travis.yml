@@ -15,7 +15,7 @@ branches:
 install:
   - cd src
   - npm install
-  - cd..
+  - cd ..
 
 deploy:
   provider: firebase
