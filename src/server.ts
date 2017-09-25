@@ -20,12 +20,6 @@ const nexudusSpaceName = process.env.NEXUDUS_SPACE_NAME || "nexudus";
 app.hotspot.set('nexudus_space_name', nexudusSpaceName);
 debugLog(`nexudusSpaceName: ${nexudusSpaceName}`);
 
-// The UniFi Site name is "default" ... by default. 
-// It is the short name of the controller and if it's not "default" then you are probably aware of it
-const unifiSiteName = process.env.UNIFI_SITE_NAME || "default";
-app.hotspot.set('unifi_site_name', unifiSiteName);
-debugLog(`unifiSiteName: ${unifiSiteName}`);
-
 // The controller is using SSL by default. Set to "false" to prevent calling HTTPS
 const unifiUseSsl = process.env.UNIFI_USE_SSL || true;
 app.hotspot.set('unifi_use_ssl', unifiUseSsl);

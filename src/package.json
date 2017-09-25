@@ -1,7 +1,7 @@
 {
   "name": "unifi-nexudus-hotspot",
   "description": "Custom UniFi hotspot portal that integrates with Nexudus Spaces and membership status aware",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "GPL-3.0",
   "author": "Dennis Alund",
   "repository": {
@@ -9,16 +9,22 @@
     "url": "https://github.com/DennisAlund/unifi-nexudus-hotspot.git"
   },
   "scripts": {
-    "start": "tsc -p . && NODE_ENV=production node ./server.js",
-    "watch": "tsc -w -p .",
-    "debug": "tsc -p . && NODE_ENV=development DEBUG=unifi-nexudus-hotspot:* node ./server.js"
+    "postinstall": "npm run build",
+    "watch": "$(npm bin)/tsc -w -p .",
+    "build": "$(npm bin)/tsc -p .",
+    "start": "$(npm bin)/tsc -p . && NODE_ENV=production node ./server.js",
+    "debug": "$(npm bin)/tsc -p . && NODE_ENV=development DEBUG=unifi-nexudus-hotspot:* node ./server.js",
+    "firebase-serve": "$(npm bin)/tsc -p . && DEBUG=unifi-nexudus-hotspot:* $(npm bin)/firebase serve --only functions,hosting"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
     "express": "~4.15.2",
+    "firebase-admin": "~4.2.1",
+    "firebase-functions": "^0.5.9",
     "morgan": "~1.8.1",
+    "pug": "^2.0.0-rc.4",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
     "serve-favicon": "~2.4.2",
@@ -28,6 +34,7 @@
   "devDependencies": {
     "@types/node": "^8.0.28",
     "@types/request-promise": "^4.1.37",
-    "pug": "^2.0.0-rc.4"
+    "firebase-tools": "^3",
+    "typescript": "^2"
   }
 }

@@ -16,6 +16,7 @@ router.post("/", async (req, res, next) => {
     const ap = req.body.ap;
     const email = req.body.email;
     const password = req.body.password;
+    const sitename = req.body.sitename;
 
     // Check with Nexudus if the provided email/password is an active member
     let nexudusCoworker: NexudusCoworker;
@@ -38,7 +39,7 @@ router.post("/", async (req, res, next) => {
 
     // Activate MAC at hotspot
     try {
-        await activateDeviceOnHotspot(mac, ap);
+        await activateDeviceOnHotspot(sitename, mac, ap);
     } catch (err) {
         debugLog("Error object: " + JSON.stringify(err, null, 2));
         console.error(`Could not activate MAC '${mac}' at the hotspot: ${err.message}`);
@@ -73,9 +74,8 @@ async function getNexudusCoworker(email: string, password: string) {
     return response;
 }
 
-async function activateDeviceOnHotspot(mac, ap) {
+async function activateDeviceOnHotspot(siteName: string, mac: string, ap: string) {
     const unifiUrl = app.hotspot.get('unifi_url');
-    const siteName = app.hotspot.get('site_name');
     const apiAdminUser = app.hotspot.get('unifi_username');
     const apiAdminPassword = app.hotspot.get('unifi_password');
 

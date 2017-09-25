@@ -34,7 +34,6 @@ These are the environment variables that are avaialable to be set in the applica
 
 * `DEFAULT_REDIRECT_URL` - URL to redirect the connecting device if none was found in the hotspot connection request *(default: [`https://www.kumpul.co`](https://www.kumpul.co))*
 * `NEXUDUS_SPACE_NAME` (**required**) - The [Nexudus space](http://coworking.nexudus.com/) short name for your business, e.g. `nexudus` as in http://nexudus.spaces.nexudus.com/.
-* `UNIFI_SITE_NAME` - The short name of your UniFi site, as referred to by the controller. If you don't know what it is, and expecially if you only have one site configured, then it's most likely `default` and you don't need to worry about it *(default: `default`)*
 * `UNIFI_USE_SSL` - Whether your UniFi controller portal is setup to use SSL *(default: `true`)*
 * `UNIFI_SSL_SELF_SIGNED` - Whether your SSL certificate for the UniFi portal is self signed *(default: `false`)*
 * `UNIFI_HOST` - IP or hostname of the UniFi controller portal, e.g. `unifi.example.com` *(default: `127.0.0.1`)*
