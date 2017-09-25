@@ -5,6 +5,7 @@ node_js:
   - "6.11"
 
 cache:
+  - node_modules
   - src/node_modules
 
 branches:
@@ -12,12 +13,34 @@ branches:
   - master
   - develop
 
+before_install:
+  # Install in project to allow caching
+  - npm install firebase@^3.12
+  - npm install typescript@^2.3
+
 install:
   - cd src
   - npm install
   - cd ..
 
+after_install:
+  - $(npm bin)/tsc -p ./src
+
+before_script:
+  - $(npm bin)/firebase use default --token $FIREBASE_DEPLOY_KEY
+
+script:
+  # Set UNIFI related variables  
+  - $(npm bin)/firebase functions:config:set unifi.username=$UNIFI_USERNAME --token $FIREBASE_DEPLOY_KEY
+  - $(npm bin)/firebase functions:config:set unifi.password=$UNIFI_PASSWORD --token $FIREBASE_DEPLOY_KEY
+  - $(npm bin)/firebase functions:config:set unifi.use_ssl=$UNIFI_USE_SSL --token $FIREBASE_DEPLOY_KEY
+  - $(npm bin)/firebase functions:config:set unifi.is_selfsigned=$UNIFI_SSL_SELF_SIGNED --token $FIREBASE_DEPLOY_KEY
+  - $(npm bin)/firebase functions:config:set unifi.host=$UNIFI_HOST --token $FIREBASE_DEPLOY_KEY
+  - $(npm bin)/firebase functions:config:set unifi.port=$UNIFI_PORT --token $FIREBASE_DEPLOY_KEY
+  - $(npm bin)/firebase functions:config:set unifi.redirect=$DEFAULT_REDIRECT_URL --token $FIREBASE_DEPLOY_KEY
+
+  # Set Nexudus related variables
+  - $(npm bin)/firebase functions:config:set nexudus.shortname=$NEXUDUS_SPACE_NAME --token $FIREBASE_DEPLOY_KEY
+
 deploy:
-  provider: firebase
-  token: $FIREBASE_DEPLOY_KEY
-  project: default
+  - $(npm bin)/firebase deploy -m "Travis build $TRAVIS_BUILD_NUMBER" --non-interactive --token $FIREBASE_DEPLOY_KEY
