@@ -37,10 +37,10 @@ script:
   - $(npm bin)/firebase functions:config:set unifi.is_selfsigned=$UNIFI_SSL_SELF_SIGNED --token $FIREBASE_DEPLOY_KEY
   - $(npm bin)/firebase functions:config:set unifi.host=$UNIFI_HOST --token $FIREBASE_DEPLOY_KEY
   - $(npm bin)/firebase functions:config:set unifi.port=$UNIFI_PORT --token $FIREBASE_DEPLOY_KEY
-  - $(npm bin)/firebase functions:config:set unifi.redirect=$DEFAULT_REDIRECT_URL --token $FIREBASE_DEPLOY_KEY
+  - $(npm bin)/firebase functions:config:set unifi.redirect_url=$DEFAULT_REDIRECT_URL --token $FIREBASE_DEPLOY_KEY
 
   # Set Nexudus related variables
   - $(npm bin)/firebase functions:config:set nexudus.shortname=$NEXUDUS_SPACE_NAME --token $FIREBASE_DEPLOY_KEY
 
-deploy:
+after_script:
   - $(npm bin)/firebase deploy -m "Travis build $TRAVIS_BUILD_NUMBER" --non-interactive --token $FIREBASE_DEPLOY_KEY
