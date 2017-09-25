@@ -10,10 +10,12 @@ cache:
 branches:
   only:
   - master
+  - develop
 
 install:
   - cd src
   - npm install
+  - cd..
 
 deploy:
   provider: firebase
