@@ -10,11 +10,11 @@
   },
   "scripts": {
     "postinstall": "npm run build",
-    "watch": "$(npm bin)/tsc -w -p .",
-    "build": "$(npm bin)/tsc -p .",
-    "start": "$(npm bin)/tsc -p . && NODE_ENV=production node ./server.js",
-    "debug": "$(npm bin)/tsc -p . && NODE_ENV=development DEBUG=unifi-nexudus-hotspot:* node ./server.js",
-    "firebase-serve": "$(npm bin)/tsc -p . && DEBUG=unifi-nexudus-hotspot:* $(npm bin)/firebase serve --only functions,hosting"
+    "watch": "tsc -w -p .",
+    "build": "tsc -p .",
+    "start": "tsc -p . && NODE_ENV=production node ./server.js",
+    "debug": "tsc -p . && NODE_ENV=development DEBUG=unifi-nexudus-hotspot:* node ./server.js",
+    "firebase-serve": "tsc -p . && DEBUG=unifi-nexudus-hotspot:* firebase serve --only functions,hosting"
   },
   "dependencies": {
     "body-parser": "~1.17.1",
@@ -33,8 +33,6 @@
   },
   "devDependencies": {
     "@types/node": "^8.0.28",
-    "@types/request-promise": "^4.1.37",
-    "firebase-tools": "^3",
-    "typescript": "^2"
+    "@types/request-promise": "^4.1.37"
   }
 }

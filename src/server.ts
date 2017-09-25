@@ -5,62 +5,23 @@
  */
 
 import * as app from "./app";
-import * as debug from "debug"
 import * as http from "http";
+import * as debug from "debug"
 
 const debugLog = debug("unifi-nexudus-hotspot:server");
 
-// The default URL for which to redirect to, if no URL is given from the device login request
-const redirectUrl = process.env.DEFAULT_REDIRECT_URL || "https://www.kumpul.co";
-app.hotspot.set('redirect_url', redirectUrl);
-debugLog(`redirectUrl: ${redirectUrl}`);
 
-// Short name of your Nexudus site. This value *must* be overridden
-const nexudusSpaceName = process.env.NEXUDUS_SPACE_NAME || "nexudus";
-app.hotspot.set('nexudus_space_name', nexudusSpaceName);
-debugLog(`nexudusSpaceName: ${nexudusSpaceName}`);
+app.hotspot.set('redirect_url', process.env.DEFAULT_REDIRECT_URL);
+app.hotspot.set('nexudus_space_name', process.env.NEXUDUS_SPACE_NAME);
+app.hotspot.set('unifi_use_ssl', process.env.UNIFI_USE_SSL);
+app.hotspot.set('unifi_ssl_is_self_signed', process.env.UNIFI_SSL_SELF_SIGNED);
+app.hotspot.set('unifi_host', process.env.UNIFI_HOST);
+app.hotspot.set('unifi_port', process.env.UNIFI_PORT);
+app.hotspot.set('unifi_username', process.env.UNIFI_ADMIN_USER);
+app.hotspot.set('unifi_password', process.env.UNIFI_ADMIN_PASSWORD);
+app.hotspot.set('port', process.env.PORT);
 
-// The controller is using SSL by default. Set to "false" to prevent calling HTTPS
-const unifiUseSsl = process.env.UNIFI_USE_SSL || true;
-app.hotspot.set('unifi_use_ssl', unifiUseSsl);
-debugLog(`unifiUseSsl: ${unifiUseSsl}`);
-
-// Whether the controller SSL certificate is self signed or not. 
-const unifiSslIsSelfSigned = process.env.UNIFI_SSL_SELF_SIGNED || false;
-app.hotspot.set('unifi_ssl_is_self_signed', unifiSslIsSelfSigned);
-debugLog(`unifiSslSelfSigned: ${unifiSslIsSelfSigned}`);
-
-// The domain name or IP of the controller.
-const unifiHost = process.env.UNIFI_HOST || "127.0.0.1";
-app.hotspot.set('unifi_host', unifiHost);
-debugLog(`unifiHost: ${unifiHost}`);
-
-// The port on which the controller responds to REST/HTTP calls
-const unifiPort = process.env.UNIFI_PORT || "8443";
-app.hotspot.set('unifi_port', unifiPort);
-debugLog(`unifiPort: ${unifiPort}`);
-
-// The full controller URL is composed of configuration values above
-const unifiUrl = `http${(unifiUseSsl ? "s" : "")}://${unifiHost}:${unifiPort}`
-app.hotspot.set('unifi_url', unifiUrl);
-debugLog(`unifiUrl: ${unifiUrl}`);
-
-// UniFi controller admin user name. This is needed to login authorize calls to the API.
-const unifiUsername = process.env.UNIFI_ADMIN_USER || "admin";
-app.hotspot.set('unifi_username', unifiUsername);
-debugLog(`unifiUsername: ${unifiUsername}`);
-
-// UniFi controller admin password. This is needed to login authorize calls to the API.
-// This value *must* be overridden
-const unifiPassword = process.env.UNIFI_ADMIN_PASSWORD || "";
-app.hotspot.set('unifi_password', unifiPassword);
-debugLog("unifiPassword: " + (unifiPassword.length > 0 ? "*****" : "<unset>"));
-
-// The port on which to serve this application on
-const port = process.env.PORT || '8080';
-app.hotspot.set('port', port);
-debugLog(`port: ${port}`);
-
+app.bootstrap();
 
 /**
  * Create HTTP server.
@@ -71,6 +32,7 @@ const server = http.createServer(app.hotspot);
 /**
  * Listen on provided port, on all network interfaces.
  */
+const port = app.hotspot.get("port");
 server.listen(port);
 
 server.on('error', onError);
