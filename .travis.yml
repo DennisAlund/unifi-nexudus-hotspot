@@ -15,8 +15,8 @@ branches:
 
 before_install:
   # Install in project to allow caching
-  - npm install firebase@^3.12
-  - npm install typescript@^2.3
+  - npm install -g firebase@^3.x
+  - npm install -g typescript@^2.x
 
 install:
   - cd src
