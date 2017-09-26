@@ -32,8 +32,6 @@ script:
   # Set UNIFI related variables  
   - firebase functions:config:set unifi.username=$UNIFI_USERNAME --token $FIREBASE_DEPLOY_KEY
   - firebase functions:config:set unifi.password=$UNIFI_PASSWORD --token $FIREBASE_DEPLOY_KEY
-  - firebase functions:config:set unifi.use_ssl=$UNIFI_USE_SSL --token $FIREBASE_DEPLOY_KEY
-  - firebase functions:config:set unifi.is_selfsigned=$UNIFI_SSL_SELF_SIGNED --token $FIREBASE_DEPLOY_KEY
   - firebase functions:config:set unifi.host=$UNIFI_HOST --token $FIREBASE_DEPLOY_KEY
   - firebase functions:config:set unifi.port=$UNIFI_PORT --token $FIREBASE_DEPLOY_KEY
   - firebase functions:config:set unifi.redirect_url=$DEFAULT_REDIRECT_URL --token $FIREBASE_DEPLOY_KEY
