@@ -14,12 +14,21 @@ The are a few good benefits of running the Unifi External guest portal on Fireba
 This most definitely is an extra configuration step of your Unifi controller. But it is also possible that it takes slightly longer time for the hotspot login page to display. You might also want to think what kind of fallback behavior you want if the WAN connection is cut. With a Firebase hosting it would mean that your hotspot login will also break when there's no Internet connection. Do you need your LAN to work whilst WAN is offline?
 
 ## Configure Unifi Controller
-Under **Settings** &rarr; **Guest Control** set the following values:
+Under **Settings** &rarr; **Guest Control** configure the options below:
+
+### Guest Policies 
 
 * **Custom Portal**: `151.101.1.195` or `151.101.65.195`
 * **Redirection**
     - **Use secure portal**: Check this box
     - **Redirect using hostname**: `<your-project-id>.firebaseapp.com`
+
+### Access Control
+
+* **Pre-Authorization Access**: 
+    - `<your-project-id>.firebaseapp.com`
+    - `maxcdn.bootstrapcdn.com`
+
 
 ## Deploying to Firebase
 You'll have to clone and configure your .firebaserc or just set the project
