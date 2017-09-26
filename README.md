@@ -7,6 +7,17 @@ This particular example is using [Nexudus Spaces](http://coworking.nexudus.com/)
 
 Apart from the project's own purpose, it is also an example of  how easy it is to adopt an existing Express application to run on Firebase hosting/cloud functions. Apart from the configuration setup, there is no code awareness whether the app is made for running on Firebase or in a Docker container. You can choose whichever works best for you.
 
+## Hotspot device requests
+Unauthenticated devices that connects to the hotspot will trigger a hotspot login page to be presented. The unifi controller will redirect the device browser to an URL similar to this:
+
+```
+http://hotspot.example.com/guest/s/default/?id=aa:bb:cc:dd:ee:ff&ap=00:11:22:33:44:55&t=1234567890&url=http://connectivitycheck.gstatic.com/generate_204&ssid=our-wifi-hotspot-ssid
+```
+
+There's currenly no graceful handling of bad requests such as 404s or requests that are missing required parameters. This is lazily designed like this since there is no reason for accessing the hotspot portal manually. The UniFi controller will populate the required parameters and make request to the supported endpoints.
+
+But the URL above is still good to have if you are in need for some troubleshooting.
+
 # Using Firebase [![Travis Build Status](https://img.shields.io/travis/DennisAlund/unifi-nexudus-hotspot.svg)](https://travis-ci.org/DennisAlund/unifi-nexudus-hotspot/builds)
 
 The are a few good benefits of running the Unifi External guest portal on Firebase: CDN, managed SSL certificate and high reliability and it's very easy to set up for automatic configuration and deployment for each new revision of the application. But it requires a roundtrip to an external site, outside of your LAN, in order to log a device in on the guest portal. 
