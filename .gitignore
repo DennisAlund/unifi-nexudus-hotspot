@@ -1,7 +1,4 @@
-node_modules
 .firebaserc
 .dev.env
-*.js
-*.js.map
 **/*.log
 \.idea/
