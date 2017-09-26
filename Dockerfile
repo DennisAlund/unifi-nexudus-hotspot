@@ -2,16 +2,19 @@ FROM node:6.11-alpine
 
 ENV PORT=80
 
-# Install tools
-RUN npm install -g typescript
-
 # Create app directory
 RUN mkdir -p /hotspot
-COPY . /hotspot
+COPY ./src /hotspot
+COPY ./LICENSE /hotspot
 WORKDIR /hotspot
 
-# Install app dependencies
-RUN npm install
+# Install tools
+RUN npm install -g typescript@^2
+
+# Install packages and build
+RUN npm install \
+    && tsc -p . \
+    && npm prune --production
 
 EXPOSE ${PORT}
 

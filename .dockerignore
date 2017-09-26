@@ -1,5 +1,4 @@
 .git
 .dev.env
-node_modules
-**/*.js
-**/*.js.map
+.vscode
+.idea
