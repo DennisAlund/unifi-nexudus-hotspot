@@ -35,6 +35,16 @@ You'll have to clone and configure your .firebaserc or just set the project
 
 ```bash
 firebase use <your-project-id>
+  
+firebase functions:config:set unifi.username="myAdminUser"
+firebase functions:config:set unifi.password="mySecretPassword"
+firebase functions:config:set unifi.host="unifi-controller.example.com"
+firebase functions:config:set unifi.port=8443
+firebase functions:config:set unifi.use_ssl=true
+firebase functions:config:set unifi.is_selfsigned=true
+firebase functions:config:set unifi.redirect_url="https://www.yourcompany.example.com"
+firebase functions:config:set nexudus.shortname="your-nexudus-space-shortname"
+
 firebase deploy
 ```
 
@@ -52,7 +62,7 @@ These are the environment variables that are avaialable to be set in the applica
 
 # Using Docker [![Dockherhub Build Status](https://img.shields.io/docker/build/kumpul/unifi-nexudus-hotspot.svg)](https://hub.docker.com/r/kumpul/unifi-nexudus-hotspot/builds/) [![Dockherhub Build Type](https://img.shields.io/docker/automated/kumpul/unifi-nexudus-hotspot.svg)](https://hub.docker.com/r/kumpul/unifi-nexudus-hotspot/builds/)
 
-This might be your preferred choice if you rather prefer to run the portal on your own server in the cloud or locally, on the same server as you are running your Unifi Controller. It's very easy to build or fetch from the [docker hub repository](https://hub.docker.com/r/kumpul/unifi-nexudus-hotspot/).
+This might be your preferred choice if you rather prefer to run the portal on your own server, in the cloud or locally on the same server as you are running your Unifi Controller. It's very easy to build or fetch from the [docker hub repository](https://hub.docker.com/r/kumpul/unifi-nexudus-hotspot/).
 
 ## Pull the image
 Pull your [preferred version from the docker hub repository](https://hub.docker.com/r/kumpul/unifi-nexudus-hotspot/tags/)
