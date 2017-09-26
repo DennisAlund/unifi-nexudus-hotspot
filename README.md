@@ -33,11 +33,13 @@ firebase deploy
 These are the environment variables that are avaialable to be set in the application. Some of the variables has a reasonable default value if omitted when running the image. The others, which are recommended or required are described below.
 
 * `nexudus.shortname` (**required**) - The [Nexudus space](http://coworking.nexudus.com/) short name for your business, e.g. `nexudus` as in http://nexudus.spaces.nexudus.com/.
-* `unifi.host` (**required**) - IP or hostname of the UniFi controller portal, e.g. `unifi.example.com`
 * `unifi.password` (**required**) - Password for the API calls to be authorized with the UniFi controller.
-* `unifi.redirect_url` - URL to redirect the connecting device if none was found in the hotspot connection request *(default: [`https://www.kumpul.co`](https://www.kumpul.co))*
+* `unifi.host` (**required**) - IP or hostname of the UniFi controller portal, e.g. `unifi.example.com`
 * `unifi.port` - The port on which the UniFi controller is responding to REST/HTTP requests. If you don't know which one it is, you can most likely just omit it and use default *(default: `8443`)*
+* `unifi.use_ssl` - Whether your UniFi controller portal is setup to use SSL *(default: `true`)* 
+* `unifi.is_selfsigned` - Whether your SSL certificate for the UniFi portal is self signed *(default: `false`)*
 * `unifi.username` - Username for the API calls to be authorized with the UniFi controller. It's recommended that you create a dedicated admin user for API calls like this one *(default: `admin`)*
+* `unifi.redirect_url` - URL to redirect the connecting device if none was found in the hotspot connection request *(default: [`https://www.kumpul.co`](https://www.kumpul.co))*
 
 # Using Docker [![Dockherhub Build Status](https://img.shields.io/docker/build/kumpul/unifi-nexudus-hotspot.svg)](https://hub.docker.com/r/kumpul/unifi-nexudus-hotspot/builds/) [![Dockherhub Build Type](https://img.shields.io/docker/automated/kumpul/unifi-nexudus-hotspot.svg)](https://hub.docker.com/r/kumpul/unifi-nexudus-hotspot/builds/)
 
