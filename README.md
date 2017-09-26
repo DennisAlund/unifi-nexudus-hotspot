@@ -31,13 +31,6 @@ These are the environment variables that are avaialable to be set in the applica
 * `unifi.port` - The port on which the UniFi controller is responding to REST/HTTP requests. If you don't know which one it is, you can most likely just omit it and use default *(default: `8443`)*
 * `unifi.username` - Username for the API calls to be authorized with the UniFi controller. It's recommended that you create a dedicated admin user for API calls like this one *(default: `admin`)*
 
-The following environment variables are **absolutely required to be set**, they don't have any default values that makes any sense:
-
- * `nexudus.shortname`
- * `unifi.password`
- * `unifi.host`
-
-
 # Using Docker [![Dockherhub Build Status](https://img.shields.io/docker/build/kumpul/unifi-nexudus-hotspot.svg)](https://hub.docker.com/r/kumpul/unifi-nexudus-hotspot/builds/) [![Dockherhub Build Type](https://img.shields.io/docker/automated/kumpul/unifi-nexudus-hotspot.svg)](https://hub.docker.com/r/kumpul/unifi-nexudus-hotspot/builds/)
 
 This might be your preferred choice if you rather prefer to run the portal on your own server in the cloud or locally, on the same server as you are running your Unifi Controller. It's very easy to build or fetch from the [docker hub repository](https://hub.docker.com/r/kumpul/unifi-nexudus-hotspot/).
@@ -77,17 +70,12 @@ To run the image in debug mode, just add `debug` after the name of the image.
 ### Environment variables
 These are the environment variables that are avaialable to be set in the application. Some of the variables has a reasonable default value if omitted when running the image. The others, which are recommended or required are described below.
 
-* `DEFAULT_REDIRECT_URL` - URL to redirect the connecting device if none was found in the hotspot connection request *(default: [`https://www.kumpul.co`](https://www.kumpul.co))*
 * `NEXUDUS_SPACE_NAME` (**required**) - The [Nexudus space](http://coworking.nexudus.com/) short name for your business, e.g. `nexudus` as in http://nexudus.spaces.nexudus.com/.
+* `UNIFI_ADMIN_PASSWORD` (**required**) - Password for the API calls to be authorized with the UniFi controller.
+* `UNIFI_ADMIN_USER` - Username for the API calls to be authorized with the UniFi controller. It's recommended that you create a dedicated admin user for API calls like this one *(default: `admin`)*
 * `UNIFI_USE_SSL` - Whether your UniFi controller portal is setup to use SSL *(default: `true`)*
 * `UNIFI_SSL_SELF_SIGNED` - Whether your SSL certificate for the UniFi portal is self signed *(default: `false`)*
 * `UNIFI_HOST` - IP or hostname of the UniFi controller portal, e.g. `unifi.example.com` *(default: `127.0.0.1`)*
 * `UNIFI_PORT` - The port on which the UniFi controller is responding to REST/HTTP requests. If you don't know which one it is, you can most likely just omit it and use default *(default: `8443`)*
-* `UNIFI_ADMIN_USER` - Username for the API calls to be authorized with the UniFi controller. It's recommended that you create a dedicated admin user for API calls like this one *(default: `admin`)*
-* `UNIFI_ADMIN_PASSWORD` (**required**) - Password for the API calls to be authorized with the UniFi controller.
+* `DEFAULT_REDIRECT_URL` - URL to redirect the connecting device if none was found in the hotspot connection request *(default: [`https://www.kumpul.co`](https://www.kumpul.co))*
 * `PORT` - The port on which to serve the application on *(default: `80`)*
-
-The following environment variables are **absolutely required to be set**, they don't have any default values that makes any sense:
-
- * `NEXUDUS_SPACE_NAME`
- * `UNIFI_ADMIN_PASSWORD`
