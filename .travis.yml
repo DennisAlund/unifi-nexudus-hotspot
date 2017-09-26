@@ -26,7 +26,7 @@ after_install:
   - tsc -p ./src
 
 before_script:
-  - firebase use default --token $FIREBASE_DEPLOY_KEY
+  - firebase use $FIREBASE_PROJECT --token $FIREBASE_DEPLOY_KEY
 
 script:
   # Set UNIFI related variables  
