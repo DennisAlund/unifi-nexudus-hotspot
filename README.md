@@ -7,6 +7,8 @@ This particular example is using [Nexudus Spaces](http://coworking.nexudus.com/)
 
 Apart from the project's own purpose, it is also an example of  how easy it is to adopt an existing Express application to run on Firebase hosting/cloud functions. Apart from the configuration setup, there is no code awareness whether the app is made for running on Firebase or in a Docker container. You can choose whichever works best for you.
 
+![Hotspot login](docs/hotspot-login.jpg)
+
 ## Hotspot device requests
 Unauthenticated devices that connects to the hotspot will trigger a hotspot login page to be presented. The unifi controller will redirect the device browser to an URL similar to this:
 
