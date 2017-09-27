@@ -17,8 +17,7 @@
     "firebase-serve": "tsc -p . && DEBUG=unifi-nexudus-hotspot:* firebase serve --only functions,hosting"
   },
   "dependencies": {
-    "body-parser": "~1.17.1",
-    "cookie-parser": "~1.4.3",
+    "@oddbit/unifi": "^1.0.0",
     "debug": "~2.6.3",
     "express": "~4.15.2",
     "firebase-admin": "~4.2.1",
@@ -27,9 +26,7 @@
     "pug": "^2.0.0-rc.4",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
-    "serve-favicon": "~2.4.2",
-    "set-cookie-parser": "^2.0.0",
-    "tough-cookie": "^2.3.2"
+    "serve-favicon": "~2.4.2"
   },
   "devDependencies": {
     "@types/node": "^8.0.28",

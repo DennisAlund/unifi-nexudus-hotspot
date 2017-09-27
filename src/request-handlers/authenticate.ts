@@ -1,7 +1,6 @@
 import * as express from "express";
 import * as rp from "request-promise";
-import * as tough from "tough-cookie";
-import * as cookieParser from "set-cookie-parser";
+import * as unifi from "@oddbit/unifi";
 import * as debug from "debug"
 import * as app from "../app";
 
@@ -75,62 +74,26 @@ async function getNexudusCoworker(email: string, password: string) {
 }
 
 async function activateDeviceOnHotspot(siteName: string, mac: string, ap: string) {
-    const unifiUrl = app.hotspot.get('unifi_url');
+    const unifiHost = app.hotspot.get("unifi_host");
     const apiAdminUser = app.hotspot.get('unifi_username');
     const apiAdminPassword = app.hotspot.get('unifi_password');
 
-    // Save login cookies here
-    const cookieJar = rp.jar();
+    const controller = new unifi.UnifiController({
+        host: unifiHost,
+        isSelfSigned: true,
+        siteName: siteName
+    });
     
-    // The UniFi controller runs on HTTPS, but not neccesrily with a proper certificate
-    // Ignore rejection if the certificate is self signed and everyone is happy with that
-    if (app.hotspot.get('unifi_ssl_is_self_signed')) {
-        debugLog("Ignoring self signed certificate warnings");
-        process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-    }
-
     debugLog(`Logging in ${apiAdminUser} at UniFi guest portal ...`);
-    const loginResponse = await rp({
-        method: "POST",
-        uri: `${unifiUrl}/api/login`,
-        resolveWithFullResponse: true,
-        jar: cookieJar,
-        json: true,
-        body: {
-            "username": apiAdminUser,
-            "password": apiAdminPassword
-        }
-    });
+    await controller.login(apiAdminUser, apiAdminPassword);
 
-    // Save the login cookie
-    cookieParser.parse(loginResponse).forEach(cookie => {
-        debugLog("Setting cookie: " + JSON.stringify(cookie));
-        cookieJar.setCookie(new tough.Cookie(cookie), unifiUrl);            
-    });
-
-    // Now send over and authorize the device MAC 
     debugLog(`Authorizing device "${mac}" at access point "${ap}"...`);
-    await rp({
-        method: "POST",
-        uri: `${unifiUrl}/api/s/${siteName}/cmd/stamgr`,
-        jar: cookieJar,
-        json: true,
-        body: {
-            "cmd": "authorize-guest",
-            "mac": mac,
-            "ap": ap,
-            "minutes": 60 * 24
-        }
-    });
+    await controller.authorizeClient(mac, ap);
     
     // The logout response likes to throw a HTTP 302 "error". So we'll catch it and ignore it.
     try {
         debugLog(`Logging out api user "${apiAdminUser}" from controller ...`);
-        await rp({
-            method: "POST",
-            uri: `${unifiUrl}/logout`,
-            jar: cookieJar
-        });
+        await controller.logout();
     } catch (err) {
         if (err.statusCode >= 400) {
             throw err;
