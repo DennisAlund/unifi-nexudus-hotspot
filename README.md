@@ -40,7 +40,6 @@ Under **Settings** &rarr; **Guest Control** configure the options below:
 
 * **Pre-Authorization Access**: 
     - `<your-project-id>.firebaseapp.com`
-    - `maxcdn.bootstrapcdn.com`
 
 
 ## Deploying to Firebase
