@@ -1,9 +1,9 @@
 # unifi-nexudus-hotspot
 UniFi - Custom portal that integrates with Nexudus Spaces and membership status aware.
 
-This project is an implementation of a external guest portal for Unifi managed networks. The purpose of having an external portal is that you can plug in your own authentication and user database to control access to your network ([read about the concept here](https://help.ubnt.com/hc/en-us/articles/204950374-UniFi-Custom-Portal-With-Individual-Usernames-and-Passwords-)).
+This project is an implementation of a external guest portal for Unifi managed networks. The purpose of having an external portal is that you can plug in your own authentication and user database to control access to your network. Read about the concept [here](https://help.ubnt.com/hc/en-us/articles/204950374-UniFi-Custom-Portal-With-Individual-Usernames-and-Passwords-) and also check out our easy to use API client library for UniFi: [@oddbit/unifi](https://www.npmjs.com/package/@oddbit/unifi)
 
-This particular example is using [Nexudus Spaces](http://coworking.nexudus.com/) to check for active membership status in a coworking space, as a requirement for being allowed onto the wifi network.
+This particular example is using [Nexudus Spaces](http://coworking.nexudus.com/) to check for active membership status in a coworking space, as a requirement for being allowed onto the wifi network. Check out the API client library [@oddbit/nexudus](https://www.npmjs.com/package/@oddbit/nexudus) that we have developed.
 
 Apart from the project's own purpose, it is also an example of  how easy it is to adopt an existing Express application to run on Firebase hosting/cloud functions. Apart from the configuration setup, there is no code awareness whether the app is made for running on Firebase or in a Docker container. You can choose whichever works best for you.
 
@@ -20,7 +20,8 @@ There's currenly no graceful handling of bad requests such as 404s or requests t
 
 But the URL above is still good to have if you are in need for some troubleshooting.
 
-# Using Firebase [![Travis Build Status](https://img.shields.io/travis/DennisAlund/unifi-nexudus-hotspot.svg)](https://travis-ci.org/DennisAlund/unifi-nexudus-hotspot/builds)
+# Using Firebase 
+[![Travis Build Status](https://img.shields.io/travis/DennisAlund/unifi-nexudus-hotspot.svg)](https://travis-ci.org/DennisAlund/unifi-nexudus-hotspot/builds)
 
 The are a few good benefits of running the Unifi External guest portal on Firebase: CDN, managed SSL certificate and high reliability and it's very easy to set up for automatic configuration and deployment for each new revision of the application. But it requires a roundtrip to an external site, outside of your LAN, in order to log a device in on the guest portal. 
 
@@ -72,7 +73,8 @@ These are the environment variables that are avaialable to be set in the applica
 * `unifi.username` - Username for the API calls to be authorized with the UniFi controller. It's recommended that you create a dedicated admin user for API calls like this one *(default: `admin`)*
 * `unifi.redirect_url` - URL to redirect the connecting device if none was found in the hotspot connection request *(default: [`https://www.kumpul.co`](https://www.kumpul.co))*
 
-# Using Docker [![Dockherhub Build Status](https://img.shields.io/docker/build/kumpul/unifi-nexudus-hotspot.svg)](https://hub.docker.com/r/kumpul/unifi-nexudus-hotspot/builds/) [![Dockherhub Build Type](https://img.shields.io/docker/automated/kumpul/unifi-nexudus-hotspot.svg)](https://hub.docker.com/r/kumpul/unifi-nexudus-hotspot/builds/)
+# Using Docker 
+[![Dockherhub Build Status](https://img.shields.io/docker/build/kumpul/unifi-nexudus-hotspot.svg)](https://hub.docker.com/r/kumpul/unifi-nexudus-hotspot/builds/) [![Dockherhub Build Type](https://img.shields.io/docker/automated/kumpul/unifi-nexudus-hotspot.svg)](https://hub.docker.com/r/kumpul/unifi-nexudus-hotspot/builds/)
 
 This might be your preferred choice if you rather prefer to run the portal on your own server, in the cloud or locally on the same server as you are running your Unifi Controller. It's very easy to build or fetch from the [docker hub repository](https://hub.docker.com/r/kumpul/unifi-nexudus-hotspot/).
 
