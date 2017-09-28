@@ -17,6 +17,7 @@
     "firebase-serve": "tsc -p . && DEBUG=unifi-nexudus-hotspot:* firebase serve --only functions,hosting"
   },
   "dependencies": {
+    "@oddbit/nexudus": "^0.1.1",
     "@oddbit/unifi": "^1.0.0",
     "debug": "~2.6.3",
     "express": "~4.15.2",
