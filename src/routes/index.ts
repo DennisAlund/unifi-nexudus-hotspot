@@ -12,12 +12,13 @@ router.get("/guest/s/:sitename", (req, res, next) => {
     debugLog("Request params: " + JSON.stringify(req.query));
 
     // TODO: Check with external API if MAC is existing
-    
-    var templateAttributes = { 
+
+    var templateAttributes = {
         title: "Hotspot Login",
         sitename: req.params.sitename,
+        host: app.hotspot.get('unifi_host'),
         mac: req.query.id, // The connecting device's MAC address
-        ap: req.query.ap, // MAC address of the AP that device is connecting to 
+        ap: req.query.ap, // MAC address of the AP that device is connecting to
         url: req.query.url || app.hotspot.get("redirect_url"),
         timestamp: req.query.t,
         ssid: req.query.ssid
@@ -30,6 +31,6 @@ router.get("/guest/s/:sitename", (req, res, next) => {
             status: 400
         });
     }
-   
+
     res.render("index", templateAttributes);
 });

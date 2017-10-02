@@ -4,9 +4,9 @@ import * as favicon from "serve-favicon";
 import * as logger from "morgan";
 import * as cookieParser from "cookie-parser";
 import * as bodyParser from "body-parser";
-import * as errors from "./request-handlers/errors";
-import * as index from "./request-handlers/index";
-import * as authenticate from "./request-handlers/authenticate";
+import * as errors from "./routes/errors";
+import * as index from "./routes/index";
+import * as authenticate from "./routes/authenticate";
 import * as debug from "debug"
 
 const debugLog = debug("unifi-nexudus-hotspot:app");

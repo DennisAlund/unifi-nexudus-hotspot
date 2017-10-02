@@ -16,9 +16,9 @@ block content
 
           .panel-body
             .row
-              form#login-form(method='post', action='/authenticate/')
-                .col-lg-12.tab-content
-                  #login.tab-pane.fade.in.active
+              .col-lg-12.tab-content
+                #login.tab-pane.fade.in.active
+                  form#login-form(method='post', action='/authenticate/')
                     .form-group
                       input#email.form-control(type='text', name="email", placeholder='Email')
                       small.form-text.text-muted The email address that you registered your membership with
@@ -31,18 +31,20 @@ block content
                         .col-md-6.col-md-offset-3
                           input(type='submit', class='form-control btn btn-primary', value='Submit')
 
-                  #token.tab-pane.fade
+                    input#mac(type='hidden', name="mac", value=mac)
+                    input#ap(type='hidden', name="ap", value=ap)
+                    input#url(type='hidden', name="url", value=url)
+                    input#timestamp(type='hidden', name="timestamp", value=timestamp)
+                    input#sitename(type='hidden', name="sitename", value=sitename)
+                    input#ssid(type='hidden', name="ssid", value=ssid)
+                #token.tab-pane.fade
+                  form#login-form(method='post', action='http://tmp.kumpul.co:8880/guest/s/default/login?t=' + timestamp)
+                    input#input-by(type='hidden', name="by", value="voucher")
                     .form-group
-                      input#token-input.form-control(type='text', name="token", placeholder='Token')
-                      small.form-text.text-muted Enter your hotspot voucher
+                      input#token-input.form-control(type='text', name="voucher", placeholder='Voucher code')
+                      small.form-text.text-muted Enter your hotspot voucher code
                     .form-group
                       .row
                         .col-md-6.col-md-offset-3
                           input(type='submit', class='form-control btn btn-primary', value='Submit')
 
-                input#mac(type='hidden', name="mac", value=mac)
-                input#ap(type='hidden', name="ap", value=ap)
-                input#url(type='hidden', name="url", value=url)
-                input#timestamp(type='hidden', name="timestamp", value=timestamp)
-                input#sitename(type='hidden', name="sitename", value=sitename)
-                input#ssid(type='hidden', name="ssid", value=ssid)

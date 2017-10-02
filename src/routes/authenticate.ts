@@ -53,12 +53,13 @@ router.post("/", async (req, res, next) => {
         siteName: sitename
     });
 
+    let authorizedClientResponse;
     try {
         debugLog(`Logging in ${apiAdminUser} at UniFi guest portal ...`);
         await unifiController.login(apiAdminUser, apiAdminPassword);
-    
+
         debugLog(`Authorizing device "${mac}" at access point "${ap}"...`);
-        await unifiController.authorizeClient(mac, ap);    
+        authorizedClientResponse = await unifiController.authorizeGuest(mac, ap);
     } catch (err) {
         debugLog("Error object: " + JSON.stringify(err, null, 2));
         console.error(`Could not activate MAC '${mac}' at the hotspot: ${err.message}`);
@@ -68,6 +69,14 @@ router.post("/", async (req, res, next) => {
         });
     }
 
+    // Let the client off the hook here.
+    debugLog(`All done. Redirecting the client to: ${redirectUrl}`);
+    res.redirect(302, redirectUrl);
+
+    unifiController.setClientNote(authorizedClientResponse._id, email);
+
+
+    // Finally close the shop
     // The logout response likes to throw a HTTP 302 "error". So we'll catch it and ignore it.
     try {
         debugLog(`Logging out api user "${apiAdminUser}" from controller ...`);
@@ -80,7 +89,7 @@ router.post("/", async (req, res, next) => {
             });
         }
     }
-    
-    debugLog(`All done. Redirecting the client to: ${redirectUrl}`);  
-    res.redirect(302, redirectUrl);
+
+
+
 });
