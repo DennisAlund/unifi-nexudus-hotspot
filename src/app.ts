@@ -42,7 +42,7 @@ export const bootstrap = () => {
     // The controller is using SSL by default. Set to "false" to prevent calling HTTPS
     setEnvironmentVariableOrDefault("unifi_use_ssl", true);
 
-    // Whether the controller SSL certificate is self signed or not. 
+    // Whether the controller SSL certificate is self signed or not.
     setEnvironmentVariableOrDefault("unifi_ssl_is_self_signed", false);
 
     // The domain name or IP of the controller.
@@ -60,7 +60,7 @@ export const bootstrap = () => {
 
     // The port on which to serve this application on
     setEnvironmentVariableOrDefault("port", "8080");
-    
+
     const unifiUseSsl = app.get("unifi_use_ssl");
     const unifiHost = app.get("unifi_host");
     const unifiPort = app.get("unifi_port");
@@ -73,7 +73,7 @@ export const bootstrap = () => {
     function setEnvironmentVariableOrDefault(name:string, defaultValue:any) {
         const configuredValue = app.get(name);
         if (typeof configuredValue === "undefined" || configuredValue === "") {
-            app.set(name, defaultValue);            
+            app.set(name, defaultValue);
             debugLog(`${name} [default]: ${defaultValue}`);
         } else {
             debugLog(`${name}: ${configuredValue}`);
