@@ -1,0 +1,35 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// PATHS
+//
+
+path /admins/{uid} is Boolean;
+
+path /vouchers {
+  index() { ["code", "expiresAt"] }
+  path /{key} is Voucher {
+    read() { isAdmin() }
+    write() { isAdmin() }
+  }
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// MODELS
+
+type Voucher {
+  isUsedUp: Boolean|Null,
+  isPrinted: Boolean|Null,
+  code: String,
+  createdAt: Number,
+  expiresAt: Number,
+  validFor: Number, // Number of seconds of valid uptime
+  usages: Number,
+  used: Number
+}
+
+
+// ---------------------------------------------------------------------------------------------------------------------
+// FUNCTIONS
+
+isAdmin() {
+  auth != null && root.admins[auth.uid] == true
+}
