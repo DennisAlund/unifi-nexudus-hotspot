@@ -73,8 +73,8 @@ router.post("/", async (req, res, next) => {
     debugLog(`All done. Redirecting the client to: ${redirectUrl}`);
     res.redirect(302, redirectUrl);
 
-    unifiController.setClientNote(authorizedClientResponse._id, email);
-
+    const macTuples = authorizedClientResponse.mac.split();
+    await unifiController.setClientAlias(authorizedClientResponse._id, `${nexudusCoworker.FullName} (${macTuples[0]}:...:${macTuples[5]})`);
 
     // Finally close the shop
     // The logout response likes to throw a HTTP 302 "error". So we'll catch it and ignore it.
