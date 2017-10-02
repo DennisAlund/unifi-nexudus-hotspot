@@ -7,13 +7,6 @@ block content
         h1.text-center= title
         .panel.panel-login
           .panel-heading
-            .row
-            ul.nav.nav-tabs
-              li.active
-                a(data-toggle='tab', href='#login') Member login
-              li
-                a(data-toggle='tab', href='#token') Voucher
-
           .panel-body
             .row
               .col-lg-12.tab-content
@@ -37,14 +30,3 @@ block content
                     input#timestamp(type='hidden', name="timestamp", value=timestamp)
                     input#sitename(type='hidden', name="sitename", value=sitename)
                     input#ssid(type='hidden', name="ssid", value=ssid)
-                #token.tab-pane.fade
-                  form#login-form(method='post', action='http://tmp.kumpul.co:8880/guest/s/default/login?t=' + timestamp)
-                    input#input-by(type='hidden', name="by", value="voucher")
-                    .form-group
-                      input#token-input.form-control(type='text', name="voucher", placeholder='Voucher code')
-                      small.form-text.text-muted Enter your hotspot voucher code
-                    .form-group
-                      .row
-                        .col-md-6.col-md-offset-3
-                          input(type='submit', class='form-control btn btn-primary', value='Submit')
-
