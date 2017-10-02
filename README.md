@@ -21,8 +21,6 @@ There's currenly no graceful handling of bad requests such as 404s or requests t
 But the URL above is still good to have if you are in need for some troubleshooting.
 
 # Using Firebase 
-[![Travis Build Status](https://img.shields.io/travis/DennisAlund/unifi-nexudus-hotspot.svg)](https://travis-ci.org/DennisAlund/unifi-nexudus-hotspot/builds)
-
 The are a few good benefits of running the Unifi External guest portal on Firebase: CDN, managed SSL certificate and high reliability and it's very easy to set up for automatic configuration and deployment for each new revision of the application. But it requires a roundtrip to an external site, outside of your LAN, in order to log a device in on the guest portal. 
 
 This most definitely is an extra configuration step of your Unifi controller. But it is also possible that it takes slightly longer time for the hotspot login page to display. You might also want to think what kind of fallback behavior you want if the WAN connection is cut. With a Firebase hosting it would mean that your hotspot login will also break when there's no Internet connection. Do you need your LAN to work whilst WAN is offline?
